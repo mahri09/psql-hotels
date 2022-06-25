@@ -4,7 +4,7 @@ const  {Pool}= require('pg');
 
 app.use(express.json());
 
-const pool = new Pool({ 
+const pool = new Pool({ /*
     // give your username
     user: 'mahri',
     host: 'localhost', 
@@ -13,7 +13,7 @@ const pool = new Pool({
     password: 'Hatyja-09',
     // Port number
     port: 5432,
-
+*/
     connectionString: process.env.PORT||3000,
     ssl: {
     rejectUnauthorized: false
