@@ -1,6 +1,10 @@
 const express = require ('express');
 const app = express();
 const  {Pool}= require('pg');
+const dotenv = require('dotenv');
+dotenv.config();
+
+ 
 
 app.use(express.json());
 
@@ -9,10 +13,26 @@ const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
     rejectUnauthorized: false
-    }
+    },
+    password:process.env.DB_PASSWORD,
   })
 
+/*
+connect to the server locally
 
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+    rejectUnauthorized: false
+    },
+    password:process.env.DB_PASSWORD,
+  });
+
+  before npm start run this commands
+  - export PORT=9999;
+  - process.env.DB_URL_To_RUN
+
+*/
 app.get('/customers', (req, res)=>{
     pool.query('SELECT * FROM customers ORDER BY id' )
     .then ((result)=>res.json(result.rows))
